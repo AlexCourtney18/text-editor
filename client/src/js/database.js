@@ -27,7 +27,6 @@ export const getDb = async () => {
 
   const result = await request;
   console.log('result.value', result);
-  return result;
 };
 
 // TODO: Add logic to a method that accepts some content and adds it to the database
@@ -40,7 +39,7 @@ export const putDb = async (content) => {
 
   const store = tx.objectStore('text');
 
-  const request = store.add({ content: content });
+  const request = store.put({ id: 1, content: content });
 
   const result = await request;
   console.log(' - data saved to the database', result);

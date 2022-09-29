@@ -24,7 +24,7 @@ module.exports = () => {
       }),
       new InjectManifest({
         swSrc: './src-sw.js',
-        swDest: 'service-worker.js',
+        swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
         name: 'Just Another Text Editor',
@@ -32,30 +32,21 @@ module.exports = () => {
         description: 'Edit text in your web browser!',
         background_color: '#7eb4e2',
         theme_color: '#7eb4e2',
-        start_url: './',
-        publicPath: './',
+        start_url: '/',
+        publicPath: '/',
+        fingerprints: false,
+        inject: true,
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
-          {
-            src: path.resolve('src/images/logo.png'),
-            size: '1024x1024',
-            destination: path.join('assets', 'icons'),
-            purpose: 'maskable'
-          }
         ],
       }),
     ],
-
     module: {
       rules: [
-        {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
-        },
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
